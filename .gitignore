@@ -1,9 +1,0 @@
-*.sublime-project
-*.sublime-workspace
-.DS_Store
-*/.DS_Store
-style/.sass-cache/
-.sass-cache
-node_modules/
-release.sh
-*.zip
