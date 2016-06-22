@@ -6,9 +6,6 @@ var $queryResultContainer = document.querySelector("#query-result");
 if (-1 !== window.navigator.platform.toLowerCase().indexOf("mac")) {
     document.querySelector("#ctrl-option").firstChild.nodeValue = "Command";
 }
-// if (!$tipsContainer.classList.contains("unshow")){
-//     $tipsContainer.classList.add("unshow");
-// }
 
 
 function queryInPopup(queryText) {
@@ -17,16 +14,14 @@ function queryInPopup(queryText) {
         $queryResultContainer.classList.remove("unshow");
     }
     if ($input.value !== "") {
-        $queryResultContainer.innerHTML = "ψ(._. )>词典君正在翻译。。。";
+        $queryResultContainer.innerHTML = "正在翻译ing...";
     }
-    //console.log("input value: " + $input.value);
-    //console.log("quertText: " + queryText);
     if (queryText) {
         $input.value = queryText;
-        chrome.extension.sendMessage({queryWord: queryText, source: "popup", useHttps: useHttpsValue}, buildResult);
+        chrome.extension.sendMessage({queryWord: queryText, source: "popup"}, buildResult);
     }
     else {
-        chrome.extension.sendMessage({queryWord: $input.value, source: "popup", useHttps: useHttpsValue}, buildResult);
+        chrome.extension.sendMessage({queryWord: $input.value, source: "popup"}, buildResult);
     }
 }
 
@@ -34,7 +29,7 @@ var buildResult = function(response) {
     //alert("response from xhr: " + JSON.stringify(response));
     var resultObj = response;
     var resultBlock = "";
-    if (resultObj.validMessage == "query success") {
+    if (resultObj.Code === 0) {
         resultBlock += resultObj.titleBlock;
         if (resultObj.basicBlock !== undefined) {
             resultBlock += resultObj.basicBlock;
@@ -44,15 +39,26 @@ var buildResult = function(response) {
         }
         $queryResultContainer.innerHTML = resultBlock;
         var voiceCollection = document.querySelectorAll(".voice-container");
-        //console.log("voiceCollection length: " + voiceCollection.length);
+        var buildVoice = function (voice) {
+            var src = voice.getAttribute("data-src");
+            var audioBlock = document.createElement("audio");
+            audioBlock.setAttribute("src", src);
+            voice.appendChild(audioBlock);
+            audioBlock.addEventListener("ended", function (event) {
+                this.load();
+            });
+            voice.addEventListener("click", function (event) {
+                audioBlock.play();
+            });
+        };
         var i, len;
         for (i = 0, len = voiceCollection.length; i < len; i++) {
             buildVoice(voiceCollection[i]);
         }
     } else {
-        if (resultObj.errorCode == 20) {
+        if (resultObj.Code == 20) {
             $queryResultContainer.innerHTML = "<p>这段文字太长，词典君无能为力了（┬_┬） <br><br>试试短一点的吧~</p>";
-        } else if (resultObj.errorCode == 40) {
+        } else if (resultObj.Code == 40) {
             $queryResultContainer.innerHTML = "<p>对不起，这段文字太高深了，请饶过词典君吧（┬_┬）</p>";
         } else {
             $queryResultContainer.innerHTML = "<p>词典君罢工啦（┬_┬）<br><br> 是不是网络不太好？<br><br> 稍后再试一次吧</p>";
@@ -75,23 +81,6 @@ $input.addEventListener("input", function (event) {
     }, 500);
 });
 
-function buildVoice(voice) {
-    var src = voice.getAttribute("data-src");
-    //console.log("voice src: [] " + src);
-    var audioBlock = document.createElement("audio");
-    audioBlock.setAttribute("src", src);
-    voice.appendChild(audioBlock);
-    audioBlock.addEventListener("ended", function (event) {
-        //console.log("loading src: " + this.getAttribute("src"));
-        this.load();
-    });
-    voice.addEventListener("click", function (event) {
-        //console.log("playing src: " + audioBlock.getAttribute("src"));
-        audioBlock.play();
-    });
-}
-
-
 function createLink(link, url) {
     link.addEventListener("click", function (event) {
         chrome.tabs.create({"url": url});
@@ -99,16 +88,12 @@ function createLink(link, url) {
 }
 
 var issue = document.querySelector("#issue");
-var email = document.querySelector("#email");
 var source = document.querySelector("#source");
 var keySet = document.querySelector("#key-set");
-var score = document.querySelector("#score");
 
-createLink(email, "mailto:ververcpp@gmail.com");
 createLink(source, "https://github.com/ververcpp/ChaZD");
 createLink(issue, "https://github.com/ververcpp/ChaZD/issues/new");
 createLink(keySet, "chrome://extensions/configureCommands");
-createLink(score, "https://chrome.google.com/webstore/detail/chazd/nkiipedegbhbjmajlhpegcpcaacbfggp");
 
 document.querySelector("#setting-button").addEventListener("click", function (event) {
     var settingBlock = document.getElementById("settings");
@@ -130,12 +115,13 @@ function totalHeight(className) {
     return sum + 10;
 }
 
-var blockHeight = totalHeight("top-menu") + totalHeight("sub-menu") + totalHeight("carved") + 32;
+var blockHeight = totalHeight("top-menu") + totalHeight("sub-menu") + totalHeight("carved") + 52;
 var linkQuery = document.querySelector("#linkQuery");
 var noSelect = document.querySelector("#noSelect");
 var mouseSelect = document.querySelector("#mouseSelect");
 var useCtrl = document.querySelector("#useCtrl");
 var autoAudio = document.querySelector("#autoAudio");
+var human = document.querySelector("#human");
 var defaultUk = document.querySelector("#defaultUk");
 var defaultUs = document.querySelector("#defaultUs");
 var showPositionSide = document.querySelector("#showPositionSide");
@@ -147,7 +133,8 @@ var turnOffTips = document.querySelector("#turn-off-tips");
 var tips = document.querySelector("#tips");
 var toggleKey = document.querySelector("#toggle-key");
 var useHttps = document.querySelector("#useHttps");
-var useHttpsValue = false;
+var autoLearn = document.querySelector("#autoLearn");
+var openAPI = document.querySelector("#open-api");
 
 chrome.storage.sync.get(null, function (items) { 
     if(items.currentWord !== "") {
@@ -162,11 +149,9 @@ chrome.storage.sync.get(null, function (items) {
     }
     if(items.useHttps === true) {
         useHttps.checked = true;
-        useHttpsValue = true;
         useHttps.nextSibling.classList.remove("unactive");
     } else {
         useHttps.checked = false;
-        useHttpsValue = false;
         useHttps.nextSibling.classList.add("unactive");
     }
     if(items.autoAudio === true) {
@@ -176,12 +161,19 @@ chrome.storage.sync.get(null, function (items) {
         autoAudio.checked = false;
         autoAudio.nextSibling.classList.add("unactive");
     }
-    if(items.defaultVoice === 1) {
-        defaultUk.checked = true;
+    if(items.defaultVoice === 0) {
+        human.checked = true;
         defaultUk.nextSibling.classList.remove("unactive");
-        defaultUs.nextSibling.classList.add("unactive");
-    } else if (items.defaultVoice === 2) {
+        defaultUs.nextSibling.classList.remove("unactive");
+        human.nextSibling.classList.add("unactive");
+    }else if (items.defaultVoice === 1) {
         defaultUs.checked = true;
+        human.nextSibling.classList.remove("unactive");
+        defaultUs.nextSibling.classList.remove("unactive");
+        defaultUk.nextSibling.classList.add("unactive");
+    }else if (items.defaultVoice === 2) {
+        defaultUs.checked = true;
+        human.nextSibling.classList.remove("unactive");
         defaultUs.nextSibling.classList.remove("unactive");
         defaultUk.nextSibling.classList.add("unactive");
     }
@@ -231,6 +223,13 @@ chrome.storage.sync.get(null, function (items) {
     } else if (items.toggleKey === "shift") {
         toggleKey.selectedIndex = 2;
     }
+    if (items.apiName === "shanbay") {
+        openAPI.selectedIndex = 0;
+    } else if (items.apiName === "xyuu") {
+        openAPI.selectedIndex = 1;
+    } else if (items.apiName === "youdao") {
+        openAPI.selectedIndex = 2;
+    }
     if (items.autoHide === true) {
         autoHide.checked = true;
         autoHide.nextSibling.classList.remove("unactive");
@@ -239,6 +238,13 @@ chrome.storage.sync.get(null, function (items) {
         autoHide.checked = false;
         autoHide.nextSibling.classList.add("unactive");
         showDuration.disabled = true;
+    }
+    if(items.autoLearn === true) {
+        autoLearn.checked = true;
+        autoLearn.nextSibling.classList.remove("unactive");
+    } else {
+        autoLearn.checked = false;
+        autoLearn.nextSibling.classList.add("unactive");
     }
     currentDuration.innerHTML = showDuration.value = items.showDuration;
 });
@@ -266,6 +272,26 @@ autoAudio.addEventListener("click", function (event) {
     }
     chrome.storage.sync.set({"autoAudio": currentAutoAudio}, function() {
         //console.log("[ChaZD] Success update settings autoAudio = " + currentAutoAudio);        
+    });
+});
+//自动加入生词本
+autoLearn.addEventListener("click", function (event) {
+    var currentAutoLearn = autoLearn.checked;
+    if (currentAutoLearn) {
+        autoLearn.nextSibling.classList.remove("unactive");
+    } else {
+        autoLearn.nextSibling.classList.add("unactive");
+    }
+    chrome.storage.sync.set({"autoLearn": currentAutoLearn}, function() {
+        //console.log("[ChaZD] Success update settings autoLearn = " + currentAutoLearn);
+    });
+});
+
+human.addEventListener("click", function (event) {
+    human.nextSibling.classList.remove("unactive");
+    human.nextSibling.classList.add("unactive");
+    chrome.storage.sync.set({"defaultVoice": 0}, function() {
+        //console.log("[ChaZD] Success update settings defaultVoice = 1");
     });
 });
 
@@ -373,14 +399,8 @@ toggleKey.onchange = function (event) {
     });
 };
 
-// showDuration.addEventListener("onclick", function (event) {
-//     currentDuration.innerHTML = event.target.value;
-//     updateSetting("duration", event.target.value);  
-// })
-
-//在popup页内 Enter键 查询选中部分
-document.addEventListener('keyup',function(e){
-    if(document.activeElement.tagName=="BODY" && e.which==13){
-        queryInPopup(window.getSelection().toString());
-    }
-});
+openAPI.onchange = function (event) {
+    chrome.storage.sync.set({"apiName" : this.value}, function() {
+        //console.log("[ChaZD] Success update settings toggleKey = " + this.value);
+    });
+};

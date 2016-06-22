@@ -3,9 +3,11 @@
 <head>
   <meta charset="utf-8">
     <title>Youdao Dictionary</title> 
-    <link rel="stylesheet" type="text/css" href="public/css/style.min.css">
+    <link rel="stylesheet" type="text/css" href="src/css/style.css">
 </head>
 <body>
+  <p id="header"><span id="logo"><img src="icons/icon48.png" width="22" height="22"/><span class="color">扇贝网</span></span><span id="status"></span></p>
+  <hr />
   <div class="input-container">
     <input id="query-word" type="text" name="" placeholder="" value="" class="input-area">
     <button id="search" class="query-button"></button>
@@ -30,8 +32,20 @@
       <a href="#" title="如果想对某个链接上的单词进行划词，为避免无法取词的问题，可以按住shift键，此时链接会变成可取词的状态，这样就可以轻松划词查词啦:)" class="link-query help">(鼠标悬停查看说明)</a>
     </div>
     <div class="top-menu">
+      <label for="useCtrl" class="sub-title">使用
+      <select id="open-api">
+        <option value="shanbay">扇贝单词</option>
+        <option value="xyuu">好学单词</option>
+        <option value="youdao">有道翻译</option>
+      </select>
+      接口</label>
+    </div>
+    <div class="top-menu">
       <input type="checkbox" name="useHttps" id="useHttps"><label for="useHttps">开启 HTTPS 接口</label>
       <a href="#" title="如果出现无法查词的问题，建议关闭此选项" class="link-query help">(说明)</a>
+    </div>
+    <div class="top-menu">
+      <input type="checkbox" name="autoLearn" id="autoLearn"><label for="autoLearn">自动加入生词本</label>
     </div>
     <hr class="carved">
     <div class="top-menu">
@@ -54,34 +68,33 @@
       <input type="checkbox" name="autoAudio" id="autoAudio"><label for="autoAudio">划词后自动发音</label>
     </div>
     <div class="top-menu">
-      <span class="sub-title">默认发音 --</span> 
+      <span class="sub-title">默认发音</span>
+      <input type="radio" name="defaultVoice" id="human" class="sub-button"><label for="human" class="sub-label">真人发音</label>
       <input type="radio" name="defaultVoice" id="defaultUk" class="sub-button"><label for="defaultUk" class="sub-label">英音</label>
       <input type="radio" name="defaultVoice" id="defaultUs" class="sub-button"><label for="defaultUs" class="sub-label">美音</label>   
     </div>
     <hr class="carved">
-    <div class="sub-menu">
-      <input type="radio" name="showPosition" value="side" id="showPositionSide"><label for="showPositionSide">翻译结果显示在浏览器边缘</label>
+    <div class="top-menu">
+      <input type="radio" name="showPosition" value="side" id="showPositionSide"><label for="showSide">翻译结果显示在浏览器边缘</label>
     </div>
     <div class="sub-menu">
-      <input type="radio" name="showPosition" value="near" id="showPositionNear"><label for="showPositionNear">翻译结果显示在单词附近</label>
+      <input type="radio" name="showPosition" value="near" id="showPositionNear"><label for="showNear">翻译结果显示在单词附近</label>
     </div>
     <div class="sub-menu">
       <input type="checkbox" name="autoHide" id="autoHide"><label for="showDuration"><b id="currentDuration"></b>秒后隐藏结果</label>
       <input type="range" name="showDuration" min="3" max="8" id="showDuration">
     </div>
   </div>
-  
   <footer>
     <div class="setting-button link" id="setting-button" title="设置"></div>
-    Powered By <img src="http://www.youdao.com/help/fanyiapi/brand/002.gif" alt="有道翻译">
+    Powered By <span id="powered-by"><img src="http://www.youdao.com/help/fanyiapi/brand/002.gif" alt="有道翻译"></span>
     <div class="contact-info">
-      <span id="score" class="link" title="亲，给个好评吧:)"></span>
-      <span id="email" class="link" title="如有问题可以发邮件"></span>
       <span id="issue" class="link" title="在Github上提出问题或建议"></span>
       <span id="source" class="link" title="源码在这里，欢迎Fork"></span>
     </div>
   </footer>
-  <script src="public/js/utility.min.js"></script>
-  <script src="public/js/popup.min.js"></script>
+
+  <script src="src/javascript/utility.js"></script>
+  <script src="src/javascript/popup.js"></script>
 </body>
 </html>

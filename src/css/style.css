@@ -1,8 +1,8 @@
 @font-face {
   font-family: "YDdict-Icon";
-  src: url("fonts/YDdict-Icon-font.eot");
-  src: url("fonts/YDdict-Icon-font.svg") format("svg"),
-       url("fonts/YDdict-Icon-font.woff") format("woff");
+  src: url("../fonts/YDdict-Icon-font.eot");
+  src: url("../fonts/YDdict-Icon-font.svg") format("svg"),
+       url("../fonts/YDdict-Icon-font.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -103,6 +103,9 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+.color{
+  color: #C09;
 }
 
 .input-container{
@@ -391,18 +394,6 @@ footer img {
 
 .link:hover {
   color: rgba(0, 0, 0, 1);
-}
-
-#score::after {
-  content: '\E80B';
-  -webkit-transition: color 0.2s linear;
-  transition: color 0.2s linear;
-}
-
-#email::after {
-  content: '\E806';
-  -webkit-transition: color 0.2s linear;
-  transition : color 0.2s linear;
 }
 
 #issue::after {
