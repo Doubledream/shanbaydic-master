@@ -91,7 +91,7 @@
 
 body {
   margin: 0.5em;
-  padding: 0;
+  padding-top:3px; 
   width: 300px;
   background-color: #faf8ef;
   color: #776e65;
@@ -104,10 +104,27 @@ ul {
   margin: 0;
   padding: 0;
 }
+a {
+    text-decoration: none;
+    color: #51A351;
+}
+
+a:hover {
+    color: white;
+    background-color: #51A351;
+}
+#header{
+    text-align: right;
+    line-height: 0;
+}
+#logo {
+    position: absolute;
+    top: 0.6em;
+    right: 16.5em;
+}
 .color{
   color: #C09;
 }
-
 .input-container{
   position: relative;
   margin: 0;

@@ -7,7 +7,59 @@ if (-1 !== window.navigator.platform.toLowerCase().indexOf("mac")) {
     document.querySelector("#ctrl-option").firstChild.nodeValue = "Command";
 }
 
+function loggedIn(nick_name) {
+    var status = document.getElementById('status');
+    var user_link = document.createElement('a');
+    var user_home = 'http://www.shanbay.com/home/';
+    user_link.setAttribute('href', user_home);
+    user_link.setAttribute('target', '_newtab');
+    user_link.appendChild(document.createTextNode(nick_name + '的空间'));
+    document.getElementById('status').innerHTML = '';
+    status.appendChild(user_link);
+}
 
+
+function loggedOut() {
+    var status = document.getElementById('status');
+    var login_link = document.createElement('a');
+    var login_url = 'http://www.shanbay.com/accounts/login/';
+    login_link.setAttribute('href', login_url);
+    login_link.setAttribute('target', '_newtab');
+    login_link.appendChild(document.createTextNode('登录'));
+    document.getElementById('status').innerHTML = '';
+    status.appendChild(login_link);
+    // body area
+  /*  var search_area = document.getElementById('search_area');
+    search_area.setAttribute('class', 'invisible');
+    showTips('请点击右上角链接登录，登录后才能查词');  */
+}
+
+
+function checkLoginStatus() {
+    // focus on input area
+    document.getElementById('query-word').focus();
+    // status area
+    var status = document.getElementById('status');
+    status.innerHTML = '正在检查...';
+    var request = new XMLHttpRequest();
+    var check_url = 'http://www.shanbay.com/api/user/info/';
+    request.open('GET', check_url);
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            // user have logged in
+            if (request.getResponseHeader('Content-Type') == 'application/json') {
+                var response = JSON.parse(request.responseText);
+                var nick_name = response.nickname;
+                loggedIn(nick_name);
+            }
+            // user have not logged in
+            else {
+                loggedOut();
+            }
+        }
+    };
+    request.send(null);
+}
 function queryInPopup(queryText) {
     //$input.select();
     if ($queryResultContainer.classList.contains("unshow")){
@@ -406,4 +458,6 @@ openAPI.onchange = function (event) {
     });
 };
 */
-
+document.addEventListener('DOMContentLoaded', function () {
+    checkLoginStatus();
+});
