@@ -143,8 +143,8 @@ var issue = document.querySelector("#issue");
 var source = document.querySelector("#source");
 var keySet = document.querySelector("#key-set");
 
-createLink(source, "https://github.com/ververcpp/ChaZD");
-createLink(issue, "https://github.com/ververcpp/ChaZD/issues/new");
+createLink(source, "https://github.com/Doubledream/shanbaydic-master");
+createLink(issue, "https://github.com/Doubledream/shanbaydic-master/issues");
 createLink(keySet, "chrome://extensions/configureCommands");
 
 document.querySelector("#setting-button").addEventListener("click", function (event) {
