@@ -1,8 +1,8 @@
 @font-face {
-  font-family: "YDdict-Icon";
-  src: url("../fonts/YDdict-Icon-font.eot");
-  src: url("../fonts/YDdict-Icon-font.svg") format("svg"),
-       url("../fonts/YDdict-Icon-font.woff") format("woff");
+  font-family: "dict-Icon";
+  src: url("../fonts/dict-Icon-font.eot");
+  src: url("../fonts/dict-Icon-font.svg") format("svg"),
+       url("../fonts/dict-Icon-font.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -169,7 +169,7 @@ ul {
   -webkit-transition: color 0.2s linear;
   transition: color 0.2s linear;
   font-size: 0.8em;
-  font-family: "YDdict-Icon";
+  font-family: "dict-Icon";
 }
 
 
@@ -215,7 +215,7 @@ ul {
 
 .title-container .title-word .voice-container::after {
   content: '\E804';
-  font-family: "YDdict-Icon";
+  font-family: "dict-Icon";
   font-size: 70%;
 }
 
@@ -263,7 +263,7 @@ ul {
 
 .voice-container::after {
   content: '\E803';
-  font-family: "YDdict-Icon";
+  font-family: "dict-Icon";
   
   -webkit-transition: color 0.2s linear;
   transition : color 0.2s linear;
@@ -311,7 +311,7 @@ ul {
 
 .web-title::before {
   content: '\E802';
-  font-family: "YDdict-Icon";
+  font-family: "dict-Icon";
   margin-right: 5px;
   color: #ccbb1e;
 }
@@ -379,7 +379,7 @@ footer img {
 
 .contact-info {
   font-size: 0.3em;
-  font-family: "YDdict-Icon";
+  font-family: "dict-Icon";
   position: absolute;
   bottom:0;
   right: 0;
@@ -416,7 +416,7 @@ footer img {
   left: 0;
   cursor: pointer;
   font-size: 0.3em;
-  font-family: "YDdict-Icon";
+  font-family: "dict-Icon";
 }
 
 .setting-button-clicked {

@@ -65,9 +65,11 @@ chrome.storage.onChanged.addListener(function(changes) {
     if (changes.autoLearn !== undefined) {
         currentSettings.autoLearn = changes.autoLearn.newValue;
     }
+    /*
     if (changes.apiName !== undefined) {
         currentSettings.apiName = changes.apiName.newValue;
     }
+    */
 });
 var frame = {
     //title frame
@@ -95,14 +97,16 @@ var frame = {
     webExplainsList : "<ul class=\"web-explains-list\">#{1}</ul>",
     webExplain : "<li><span class=\"web-key\">#{1}</span><span class=\"web-value\">#{2}</span></li>"
 };
-var youdao = function(){
+
+var shanbayinit = function(){
+    /*
     var config = {key: 1116151381,keyfrom : "youdaocidian"};
     var urls = {
         dict : "http://fanyi.youdao.com/openapi.do?keyfrom=" + config.keyfrom +"&key="+ config.key +"&type=data&doctype=json&version=1.1&q=",
         voice : "http://dict.youdao.com/dictvoice?audio=",
         dictHttps : "https://fanyi.youdao.com/openapi.do?keyfrom=" + config.keyfrom +"&key="+ config.key +"&type=data&doctype=json&version=1.1&q=",
         voiceHttps : "https://dict.youdao.com/dictvoice?audio="
-    };
+    }; */
     var self = this;
     self.initVoice = function (src, type) {
         var title = "";
@@ -311,7 +315,7 @@ var shanbay = function(){
     self.dict = "http://www.shanbay.com/api/v1/bdc/search/?word=";
     self.learn = "http://www.shanbay.com/api/v1/bdc/learning/";
     self.login = "http://www.shanbay.com/accounts/login/";
-    youdao.call(this);
+    shanbayinit.call(this);
 
     /*jshint camelcase: false */
     self.getVoice = function(result,type){
@@ -395,22 +399,22 @@ var shanbay = function(){
                     });
                 }
             } else if (result.status_code === 1) {
-                var y = new youdao();
+                var y = new shanbayinit();
                 y.Query(queryWord, wordSource, sendResponse);
             }
         });
     };
 };
-
+/*
 var xyuu = function(){
     shanbay.call(this);
     this.dict ="http://dict.xyuu.com.cn/search/?word=";
 };
-
+*/
 var api = {
-    youdao:youdao,
+    //youdao:youdao,
     shanbay:shanbay,
-    xyuu:xyuu
+    //xyuu:xyuu
 };
 
 //判断一个初始化后的对象是否为空

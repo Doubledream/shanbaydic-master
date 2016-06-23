@@ -134,7 +134,7 @@ var tips = document.querySelector("#tips");
 var toggleKey = document.querySelector("#toggle-key");
 var useHttps = document.querySelector("#useHttps");
 var autoLearn = document.querySelector("#autoLearn");
-var openAPI = document.querySelector("#open-api");
+//var openAPI = document.querySelector("#open-api");
 
 chrome.storage.sync.get(null, function (items) { 
     if(items.currentWord !== "") {
@@ -223,6 +223,7 @@ chrome.storage.sync.get(null, function (items) {
     } else if (items.toggleKey === "shift") {
         toggleKey.selectedIndex = 2;
     }
+    /*
     if (items.apiName === "shanbay") {
         openAPI.selectedIndex = 0;
     } else if (items.apiName === "xyuu") {
@@ -230,6 +231,7 @@ chrome.storage.sync.get(null, function (items) {
     } else if (items.apiName === "youdao") {
         openAPI.selectedIndex = 2;
     }
+    */
     if (items.autoHide === true) {
         autoHide.checked = true;
         autoHide.nextSibling.classList.remove("unactive");
@@ -398,9 +400,10 @@ toggleKey.onchange = function (event) {
         //console.log("[ChaZD] Success update settings toggleKey = " + this.value);
     });
 };
-
+/*
 openAPI.onchange = function (event) {
     chrome.storage.sync.set({"apiName" : this.value}, function() {
-        //console.log("[ChaZD] Success update settings toggleKey = " + this.value);
     });
 };
+*/
+

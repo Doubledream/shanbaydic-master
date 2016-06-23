@@ -258,7 +258,7 @@ a.ChaZD-link {
 /*
 .ChaZD-result-container .voice-container::after {
   content: '\E803';
-  font-family: "YDdict-Icon";
+  font-family: "dict-Icon";
   
   -webkit-transition: color 0.2s linear;
   transition : color 0.2s linear;
