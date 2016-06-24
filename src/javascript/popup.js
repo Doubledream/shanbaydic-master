@@ -187,6 +187,8 @@ var toggleKey = document.querySelector("#toggle-key");
 var useHttps = document.querySelector("#useHttps");
 var autoLearn = document.querySelector("#autoLearn");
 //var openAPI = document.querySelector("#open-api");
+var filter = document.querySelector("#filter");
+var fit = document.querySelector("#fit");
 
 chrome.storage.sync.get(null, function (items) { 
     if(items.currentWord !== "") {
@@ -212,6 +214,20 @@ chrome.storage.sync.get(null, function (items) {
     } else {
         autoAudio.checked = false;
         autoAudio.nextSibling.classList.add("unactive");
+    }
+    if(items.filter === true){
+        filter.checked = true;
+        filter.previousSibling.classList.remove("unactive");
+    }else{
+        filter.checked = false;
+        filter.previousSibling.classList.add("unactive");
+    }
+    if(items.fit === true){
+        fit.checked = true;
+        fit.previousSibling.classList.remove("unactive");
+    }else{
+        fit.checked = false;
+        fit.previousSibling.classList.add("unactive");
     }
     if(items.defaultVoice === 0) {
         human.checked = true;
@@ -326,6 +342,30 @@ autoAudio.addEventListener("click", function (event) {
     }
     chrome.storage.sync.set({"autoAudio": currentAutoAudio}, function() {
         //console.log("[ChaZD] Success update settings autoAudio = " + currentAutoAudio);        
+    });
+});
+//广告过滤
+filter.addEventListener("click", function (event) {
+    var currentFilter = filter.checked;
+    if(currentFilter) {
+        filter.previousSibling.classList.remove("unactive");
+    } else {
+        filter.previousSibling.classList.add("unactive");
+    }
+    chrome.storage.sync.set({"filter": currentFilter}, function() {
+        //console.log("Success update filter = " + currentFilter);
+    });
+});
+//页面适配
+fit.addEventListener("click", function (event) {
+    var currentFit = fit.checked;
+    if(currentFit) {
+        fit.previousSibling.classList.remove("unactive");
+    } else {
+        fit.previousSibling.classList.add("unactive");
+    }
+    chrome.storage.sync.set({"fit":currentFit},function(){
+        console.log("Success update fit =" + currentFit);
     });
 });
 //自动加入生词本
@@ -452,6 +492,7 @@ toggleKey.onchange = function (event) {
         //console.log("[ChaZD] Success update settings toggleKey = " + this.value);
     });
 };
+
 /*
 openAPI.onchange = function (event) {
     chrome.storage.sync.set({"apiName" : this.value}, function() {

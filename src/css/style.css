@@ -125,6 +125,9 @@ a:hover {
 .color{
   color: #C09;
 }
+.filter{
+  left:10px;
+}
 .input-container{
   position: relative;
   margin: 0;
@@ -387,13 +390,6 @@ footer {
   color: rgba(0, 0, 0, 0.2);
 }
 
-footer img {
-  position: relative;
-  top:4px;
-  width: 50px;
-  opacity: 0.6;
-}
-
 .contact-info {
   font-size: 0.3em;
   font-family: "dict-Icon";
@@ -561,4 +557,73 @@ hr.carved {
   background-image: -webkit-linear-gradient(center top,rgb(221,221,221) 50%,rgb(255,255,255) 50%);
   background-image: -o-linear-gradient(center top,rgb(221,221,221) 50%,rgb(255,255,255) 50%);
   background-image: -moz-linear-gradient(center top,rgb(221,221,221) 50%,rgb(255,255,255) 50%);
+}
+
+.mui-switch {
+  width: 52px;
+  height: 31px;
+  position: relative;
+  border: 1px solid #dfdfdf;
+  background-color: #fdfdfd;
+  box-shadow: #dfdfdf 0 0 0 0 inset;
+  border-radius: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-clip: content-box;
+  display: inline-block;
+  -webkit-appearance: none;
+  user-select: none;
+  outline: none; }
+  .mui-switch:before {
+    content: '';
+    width: 29px;
+    height: 29px;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    border-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); }
+  .mui-switch:checked {
+    border-color: #51A351;
+    box-shadow: #51A351 0 0 0 16px inset;
+    background-color: #51A351; }
+    .mui-switch:checked:before {
+      left: 21px; }
+  .mui-switch.mui-switch-animbg {
+    transition: background-color ease 0.4s; }
+    .mui-switch.mui-switch-animbg:before {
+      transition: left 0.3s; }
+    .mui-switch.mui-switch-animbg:checked {
+      box-shadow: #51A351 0 0 0 0 inset;
+      background-color: #51A351;
+      transition: border-color 0.4s, background-color ease 0.4s; }
+      .mui-switch.mui-switch-animbg:checked:before {
+        transition: left 0.3s; }
+  .mui-switch.mui-switch-anim {
+    transition: border cubic-bezier(0, 0, 0, 1) 0.4s, box-shadow cubic-bezier(0, 0, 0, 1) 0.4s; }
+    .mui-switch.mui-switch-anim:before {
+      transition: left 0.3s; }
+    .mui-switch.mui-switch-anim:checked {
+      box-shadow: #51A351 0 0 0 16px inset;
+      background-color: #51A351;
+      transition: border ease 0.4s, box-shadow ease 0.4s, background-color ease 1.2s; }
+      .mui-switch.mui-switch-anim:checked:before {
+        transition: left 0.3s; }
+.buttons{
+  text-align: center;
+  vertical-align: middle;
+}
+.buttons label{
+  vertical-align: middle;
+  font-size: 12pt;
+  display: inline-block;
+  position: relative;
+  bottom:13px;
 }

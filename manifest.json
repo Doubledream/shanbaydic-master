@@ -5,11 +5,6 @@
   "description": "扇贝查词，支持划词翻译，登录扇贝账号加入生词本",
 
   "permissions": [
-    //"https://dict.youdao.com/*",
-    //"https://fanyi.youdao.com/*",
-    //"http://dict.youdao.com/*",
-    //"http://fanyi.youdao.com/*",
-    //"http://dict.xyuu.com.cn/*",
     "http://*/*",
     "http://*.shanbay.com/*",
     "contextMenus",
@@ -22,7 +17,7 @@
 
   "background": {
       "persistent": true,
-      "scripts": [ "src/javascript/utility.js", "src/javascript/background.js" ]
+      "scripts": [ "src/javascript/utility.js", "src/javascript/background.js"]
    },
 
   "content_scripts": [ {

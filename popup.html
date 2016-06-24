@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="src/css/style.css">
 </head>
 <body>
-  <p id="header"><span id="logo"><img src="icons/icon48.png" width="22" height="22"/><span class="color">扇贝网</span></span><span id="status"></span></p>
+  <p id="header"><span id="logo"><img src="icons/icon48.png" width="22" height="22"/><span class="color"><b>扇贝网</b></span></span><span id="status"></span></p>
   <hr />
   <div class="input-container">
     <input id="query-word" type="text" name="" placeholder="" value="" class="input-area">
@@ -86,6 +86,10 @@
       <input type="checkbox" name="autoHide" id="autoHide"><label for="showDuration"><b id="currentDuration"></b>秒后隐藏结果</label>
       <input type="range" name="showDuration" min="3" max="8" id="showDuration">
     </div>
+  </div>
+  <div class="buttons">
+    <label for="filter">过滤广告</label><input class="mui-switch" type="checkbox" name="filter" id="filter">
+    <label for="fit">页面适配</label><input class="mui-switch" type="checkbox" name="fit" id="fit">
   </div>
   <footer>
     <div class="setting-button link" id="setting-button" title="设置"></div>

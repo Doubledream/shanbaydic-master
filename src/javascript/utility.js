@@ -25,7 +25,9 @@ var settings = {
     showDuration: 3,                //翻译结果显示持续时间
     defaultVoice: 0,                //划词默认发音：0--真人发音；1--英音；2--美音
     useHttps: false,                //是否使用 HTTPS 的接口
-    autoLearn:true,                  //是否自动加入生词本
+    autoLearn: true,                  //是否自动加入生词本 
+    filter: false,
+    fit: false,
     apiName:"shanbay"
 };
 var currentSettings = settings;
@@ -43,6 +45,12 @@ chrome.storage.onChanged.addListener(function(changes) {
     }
     if (changes.autoAudio !== undefined) {
         currentSettings.autoAudio = changes.autoAudio.newValue;
+    }
+    if (changes.filter !== undefined){
+        currentSettings.filter = changes.filter.newValue;
+    }
+    if (changes.fit !== undefined){
+        currentSettings.fit = changes.fit.newValue;
     }
     if (changes.defaultVoice !== undefined) {
         currentSettings.defaultVoice = changes.defaultVoice.newValue;
