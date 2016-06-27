@@ -576,54 +576,107 @@ hr.carved {
   -webkit-appearance: none;
   user-select: none;
   outline: none; }
-  .mui-switch:before {
-    content: '';
-    width: 29px;
-    height: 29px;
-    position: absolute;
-    top: 0px;
-    left: 0;
-    border-radius: 20px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    background-color: #fff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); }
-  .mui-switch:checked {
-    border-color: #51A351;
-    box-shadow: #51A351 0 0 0 16px inset;
-    background-color: #51A351; }
-    .mui-switch:checked:before {
-      left: 21px; }
-  .mui-switch.mui-switch-animbg {
-    transition: background-color ease 0.4s; }
-    .mui-switch.mui-switch-animbg:before {
-      transition: left 0.3s; }
-    .mui-switch.mui-switch-animbg:checked {
-      box-shadow: #51A351 0 0 0 0 inset;
-      background-color: #51A351;
-      transition: border-color 0.4s, background-color ease 0.4s; }
-      .mui-switch.mui-switch-animbg:checked:before {
-        transition: left 0.3s; }
-  .mui-switch.mui-switch-anim {
-    transition: border cubic-bezier(0, 0, 0, 1) 0.4s, box-shadow cubic-bezier(0, 0, 0, 1) 0.4s; }
-    .mui-switch.mui-switch-anim:before {
-      transition: left 0.3s; }
-    .mui-switch.mui-switch-anim:checked {
-      box-shadow: #51A351 0 0 0 16px inset;
-      background-color: #51A351;
-      transition: border ease 0.4s, box-shadow ease 0.4s, background-color ease 1.2s; }
-      .mui-switch.mui-switch-anim:checked:before {
-        transition: left 0.3s; }
-.buttons{
+.mui-switch:before {
+  content: '';
+  width: 29px;
+  height: 29px;
+  position: absolute;
+  top: 0px;
+  left: 0;
+  border-radius: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); }
+.mui-switch:checked {
+  border-color: #51A351;
+  box-shadow: #51A351 0 0 0 16px inset;
+  background-color: #51A351; }
+.mui-switch:checked:before {
+  left: 21px; }
+.mui-switch.mui-switch-animbg {
+  transition: background-color ease 0.4s; }
+.mui-switch.mui-switch-animbg:before {
+  transition: left 0.3s; }
+.mui-switch.mui-switch-animbg:checked {
+  box-shadow: #51A351 0 0 0 0 inset;
+  background-color: #51A351;
+  transition: border-color 0.4s, background-color ease 0.4s; }
+.mui-switch.mui-switch-animbg:checked:before {
+  transition: left 0.3s; }
+.mui-switch.mui-switch-anim {
+  transition: border cubic-bezier(0, 0, 0, 1) 0.4s, box-shadow cubic-bezier(0, 0, 0, 1) 0.4s; }
+.mui-switch.mui-switch-anim:before {
+  transition: left 0.3s; }
+.mui-switch.mui-switch-anim:checked {
+  box-shadow: #51A351 0 0 0 16px inset;
+  background-color: #51A351;
+  transition: border ease 0.4s, box-shadow ease 0.4s, background-color ease 1.2s; }
+.mui-switch.mui-switch-anim:checked:before {
+  transition: left 0.3s; }
+#buttons{
   text-align: center;
   vertical-align: middle;
 }
-.buttons label{
+#buttons label{
   vertical-align: middle;
   font-size: 12pt;
   display: inline-block;
   position: relative;
   bottom:13px;
 }
+
+#wrapper{
+  text-align: center;
+}
+
+#wrapper button{
+  color:#444;
+  font-size: 10pt;
+  display: inline-block;
+  position: relative;
+  margin: 10px;
+  padding: 0 20px;
+  text-decoration: none;
+  font: bold 12px/25px Arial, sans-serif;
+ 
+  text-shadow: 1px 1px 1px rgba(255,255,255, .22);
+ 
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+ 
+  -webkit-box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+  -moz-box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+  box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+ 
+  -webkit-transition: all 0.15s ease;
+  -moz-transition: all 0.15s ease;
+  -o-transition: all 0.15s ease;
+  -ms-transition: all 0.15s ease;
+  transition: all 0.15s ease;
+
+  color: #515151;
+ 
+  background: #515151; /* Old browsers */
+  background: -moz-linear-gradient(top,  #a5cd4e 0%, #6b8f1a 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a5cd4e), color-stop(100%,#6b8f1a)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #a5cd4e 0%,#6b8f1a 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #a5cd4e 0%,#6b8f1a 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #a5cd4e 0%,#6b8f1a 100%); /* IE10+ */
+  background: linear-gradient(top,  #a5cd4e 0%,#6b8f1a 100%); /* W3C */
+}
+
+#wrapper button:hover {
+    -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,.29), inset 0px 0px 2px rgba(0,0,0, .5);
+    -moz-box-shadow: 1px 1px 1px rgba(0,0,0,.29), inset 0px 0px 2px rgba(0,0,0, .5);
+    box-shadow: 1px 1px 1px rgba(0,0,0,.29), inset 0px 0px 2px rgba(0,0,0, .5);
+}
+#wrapper button:active {
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0, .8);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0, .8);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0, .8);
+}
+

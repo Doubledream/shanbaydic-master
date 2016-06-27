@@ -141,11 +141,11 @@ function createLink(link, url) {
 
 var issue = document.querySelector("#issue");
 var source = document.querySelector("#source");
-var keySet = document.querySelector("#key-set");
+//var keySet = document.querySelector("#key-set");
 
 createLink(source, "https://github.com/Doubledream/shanbaydic-master");
 createLink(issue, "https://github.com/Doubledream/shanbaydic-master/issues");
-createLink(keySet, "chrome://extensions/configureCommands");
+//createLink(keySet, "chrome://extensions/configureCommands");
 
 document.querySelector("#setting-button").addEventListener("click", function (event) {
     var settingBlock = document.getElementById("settings");
@@ -365,7 +365,7 @@ fit.addEventListener("click", function (event) {
         fit.previousSibling.classList.add("unactive");
     }
     chrome.storage.sync.set({"fit":currentFit},function(){
-        console.log("Success update fit =" + currentFit);
+        //console.log("Success update fit =" + currentFit);
     });
 });
 //自动加入生词本
@@ -502,3 +502,15 @@ openAPI.onchange = function (event) {
 document.addEventListener('DOMContentLoaded', function () {
     checkLoginStatus();
 });
+
+var wrapper = document.getElementById('wrapper');
+
+wrapper.onclick = function (e) {
+    var id = e.target.id;
+    var txt = id + ' clicked';
+    var msg = {content: txt};
+
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, msg);
+    });
+};

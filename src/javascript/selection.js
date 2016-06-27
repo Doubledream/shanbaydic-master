@@ -223,7 +223,7 @@
                     $resultContainer.appendChild(temp);
                     $resultContainer.querySelector(".web-title").innerHTML = "网络释义";
                 } else {
-                    $resultContainer.innerHTML = "╮(╯▽╰)╭划词君无能为力啊<br> 还是右键问问谷歌君吧=>";
+                    $resultContainer.innerHTML = "划词君无能为力啊<br> 还是右键问问谷歌君吧=>";
                 }
             } else {
                 if (resultObj.Code == 20) {

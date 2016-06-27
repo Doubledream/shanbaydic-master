@@ -45,9 +45,9 @@ chrome.runtime.onInstalled.addListener(
         if (details.reason === "install") {
             //console.log("[ChaZD] first install.");
             showNotification({
-                title : "感谢支持 ChaZD ！",
-                content : "ChaZD 力求成为最简洁易用的 Chrome 词典扩展，欢迎提出您的意见或建议。" + 
-                    "如果觉得 ChaZD 还不错，记得给5星好评哦:)"
+                title : "shanbay test！",
+                content : "欢迎提出您的意见或建议。" + 
+                    "如果觉得还不错，记得给好评哦"
             });
             //alert("Thank you for install my app:)");
         } else if (details.reason === "update") {
@@ -57,20 +57,13 @@ chrome.runtime.onInstalled.addListener(
                 //console.log("[ChaZD] Success update settings selectMode = mouseSelect");
             });
             showNotification({
-                title : "ChaZD 更新到0.8.19版！",
+                title : "ChaZD 更新到五版！",
                 content : "修复若干 bug，如出现无法查词的问题，请在设置中关闭使用 HTTPS 接口"                          
             });
         }
     }
 );
 
-// chrome.contextMenus.create({"title": "在此页面禁用 ChaZD", "id": "deniedPage"});
-// chrome.contextMenus.create({"title": "在此站点禁用 ChaZD", "id": "deniedSite"});
-// chrome.contextMenus.create({"title": "管理禁用列表", "id": "deniedList"});
-// chrome.contextMenus.onClicked.addListener(function (info, tab){
-//     console.log(JSON.stringify(info));
-//     if (info.menuItemId === "deniedPage") {}
-// });
 
 chrome.storage.sync.get(null,function (items) {
     //console.log(JSON.stringify(items));

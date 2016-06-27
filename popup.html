@@ -17,12 +17,12 @@
 
   <div class="tips-container unshow" id="tips">
     <p>
-      Tips: 你可以通过“Ctrl+Shift+F”快速启动词典，
-      也可以在<span id="key-set" class="link">这里</span>自定义快捷键哦:)
+      Tips 1: 若不能自动启动划词翻译，可尝试刷新网页
     </p>
     <p>
-      Tips 2: 如出现无法查词的问题，请在设置中关闭使用 HTTPS 接口
+      Tips 2: 点击设置图标可以进行相应的设置哦~
     </p>
+    <br/>
     <div id="turn-off-tips">不再显示Tips</div>
   </div>
 
@@ -87,10 +87,15 @@
       <input type="range" name="showDuration" min="3" max="8" id="showDuration">
     </div>
   </div>
-  <div class="buttons">
-    <label for="filter">过滤广告</label><input class="mui-switch" type="checkbox" name="filter" id="filter">
+  <div id="buttons">
+    <label for="filter">页面去燥</label><input class="mui-switch" type="checkbox" name="filter" id="filter">
     <label for="fit">页面适配</label><input class="mui-switch" type="checkbox" name="fit" id="fit">
   </div>
+  <div id="wrapper">
+    <button type="button" id="filter" > 正文过滤模式 </button>
+    <button type="button" id="paging" > 分页阅读模式 </button>
+  </div>
+  <br/>
   <footer>
     <div class="setting-button link" id="setting-button" title="设置"></div>
     Powered By Shanbay

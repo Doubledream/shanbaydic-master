@@ -454,3 +454,122 @@ function fmt() {
 function trim(str) {
     return str.replace(/(^\s*)|(\s*$)/g, "");
 }
+//var isFilter = false,
+//var isPaging = false,
+//var pageContent = getContent();
+chrome.extension.onMessage.addListener(function(message, sender, sendResponse){
+    switch (message.content) {
+        case 'filter clicked':
+            var isFilter = currentSettings.filter;
+            if (isFilter) {
+                filt(getContent());
+            } else {
+                unFilt(getContent());
+            }
+            break;
+
+        case 'paging clicked':
+            var isPaging = currentSettings.fit;
+
+            if (isPaging) {
+                paging(getContent());
+            } else {
+                unPaging();
+            }
+            break;
+    }
+
+});
+
+function filt(pageContent) {
+    document.body.style.visibility = 'hidden';
+    for (let i of pageContent.arrToShow) {
+        i.style.visibility = 'visible';
+    }
+    for (let i of pageContent.arrToHide) {
+        i.style.visibility = 'hidden';
+    }
+}
+
+
+function unFilt(pageContent) {
+    document.body.style.visibility = 'visible';
+    for (let i of pageContent.arrToHide) {
+        i.style.visibility = 'visible';
+    }
+}
+
+
+function paging(pageContent) {
+
+    document.body.style.backgroundColor = 'rgb(70,202,165)';
+
+    var pagePositionArr = [];
+    var contentBeginPosition = pageContent.headerTop;
+    var contentEndPosition = pageContent.artcleBodyBottom;
+
+    var btnSet = document.createElement('div');
+    btnSet.style.position = 'fixed';
+    btnSet.style.top = '0';
+    btnSet.style.visibility = 'visible';
+    btnSet.style.height = '40px';
+    btnSet.style.width = window.innerWidth + 'px';
+    btnSet.style.backgroundColor = "#faf8ef";
+
+    var pageHeight = window.innerHeight - parseInt(btnSet.style.height) - 32;
+    var y = contentBeginPosition - parseInt(btnSet.style.height);
+    for (; y < contentEndPosition; y += pageHeight) {
+        pagePositionArr.push(y);
+    }
+
+    var btnOriginLeft = pageContent.headerLeft;
+    for (let i in pagePositionArr) {
+        var btn = document.createElement('button');
+        btn.style.position = 'relative';
+        btn.style.left = btnOriginLeft + 'px';
+        btn.innerText = 'Page' + (parseInt(i) + 1);
+        btn.onclick = function() {
+            window.scrollTo(0, pagePositionArr[i])
+        };
+
+        btnSet.appendChild(btn);
+    }
+
+    document.body.appendChild(btnSet);
+
+    // 默认滚动到第一页的位置
+    window.scrollTo(0, pagePositionArr[0]);
+}
+
+
+function unPaging() {
+    location.reload();
+}
+
+function getContent() {
+    var article = document.getElementById('article');
+
+    var h = article.querySelector('header h1');
+    var standfirst = article.querySelector('div.content__standfirst p');
+    var img = article.querySelector('#img-1 picture img');
+    var figcaption = article.querySelector('#img-1 figcaption');
+    var artcleBody = article.querySelector('div.content__article-body');
+    var arrToShow = [h, standfirst, img, figcaption, artcleBody];
+
+    var aside = article.querySelector('aside.element.element-rich-link ');
+    var ad = article.querySelector('#dfp-ad--inline1');
+    var arrToHide = [aside, ad];
+
+    var headerTop = h.getBoundingClientRect().top;
+    var headerLeft = h.getBoundingClientRect().left;
+    var artcleBodyBottom = artcleBody.getBoundingClientRect().bottom;
+
+    return {
+        arrToShow: arrToShow,
+        arrToHide: arrToHide,
+        headerTop: headerTop,
+        headerLeft: headerLeft,
+        artcleBodyBottom: artcleBodyBottom
+    };
+}
+

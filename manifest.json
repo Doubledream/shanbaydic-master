@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "shanbay test by zhaojun",
   "version": "0.8.20",
-  "description": "扇贝查词，支持划词翻译，登录扇贝账号加入生词本",
+  "description": "扇贝查词，支持划词翻译，登录扇贝账号加入生词本；支持阅读模式和分页模式",
 
   "permissions": [
     "http://*/*",
@@ -24,7 +24,7 @@
     "all_frames": true,
     "css": ["src/css/inPage.css"],
     "js": ["src/javascript/utility.js", "src/javascript/selection.js"],
-    "matches": ["<all_urls>"]
+    "matches": ["<all_urls>", "file:///*/*"]
       
   } ],
 
